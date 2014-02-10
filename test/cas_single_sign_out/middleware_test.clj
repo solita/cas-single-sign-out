@@ -3,7 +3,7 @@
             [ring.mock.request :refer :all]
             [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.session.memory :refer [memory-store]]
-            [clj-cas-client.single-sign-out :refer :all]))
+            [cas-single-sign-out.middleware :refer :all]))
 
 (defn single-sign-out-request [ticket]
   (-> (request :post "/")
