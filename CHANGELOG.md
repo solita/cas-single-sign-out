@@ -1,4 +1,4 @@
-## 0.1.1
+## 0.1.1 (2014-02-11)
 - Narrow Ring dependencies
   - Depend on `ring` to `ring-core`.
   - Exclude transitive `ring` dependency via `clj-cas-client`.
