@@ -1,4 +1,4 @@
-(defproject cas-single-sign-out "0.1.0"
+(defproject cas-single-sign-out "0.2.0-SNAPSHOT"
   :description "Ring middleware for CAS single sign out"
   :url "https://github.com/solita/cas-single-sign-out"
   :license {:name "Eclipse Public License"
