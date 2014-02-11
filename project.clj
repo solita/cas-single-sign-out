@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.logging "0.2.6"]
                  [org.clojure/data.zip "0.1.1"]
-                 [ring "1.2.1"]
+                 [ring/ring-core "1.2.1"]
                  [robert/hooke "1.3.0"]
-                 [clj-cas-client "0.0.6"]]
+                 [clj-cas-client "0.0.6" :exclusions [ring]]]
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}})
