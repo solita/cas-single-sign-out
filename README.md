@@ -11,7 +11,7 @@ from the CAS server, it destroys the associated session.
 
 To install, add the following to your project `:dependencies`:
 
-    [cas-single-sign-out "0.1.2"]
+    [cas-single-sign-out "0.1.3"]
 
 ## Usage
 
