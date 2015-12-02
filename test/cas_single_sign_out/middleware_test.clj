@@ -1,6 +1,7 @@
 (ns cas-single-sign-out.middleware-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :refer :all]
+            [ring.middleware.cookies :refer [wrap-cookies]]
             [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.session.memory :refer [memory-store]]
             [cas-single-sign-out.middleware :refer :all]))
@@ -92,3 +93,24 @@
              single-sign-out-response))
       ;; The first session should have been destroyed.
       (is (not (@session-atom session-key))))))
+
+;; The middleware should work with Ring 1.4.0 and explicitly added wrap-cookies
+;; middleware. See https://github.com/solita/cas-single-sign-out/issues/1
+(deftest wrap-cookies-test
+  (let [session-atom (atom {})
+        session-store (memory-store session-atom)
+        returned-response {:headers {"Content-Type" "text/plain"}
+                           :status 200
+                           :body "Hello"
+                           :session {:some [:session :data]}}
+        handler (-> (constantly returned-response)
+                  ;; Add the wrap-cookies middleware.
+                  wrap-cookies
+                  (wrap-session {:store session-store})
+                  (wrap-cas-single-sign-out session-store))]
+    ;; Check that wrap-cas-single-sign-out doesn't break the wrap-cookies
+    ;; middleware
+    (let [received-response (-> (request :get "/")
+                              handler)]
+      (is (re-matches #"ring-session=.*"
+                      (-> received-response :headers (get "Set-Cookie") first))))))

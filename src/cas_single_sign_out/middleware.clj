@@ -34,7 +34,7 @@
 ;; The use of thread-local bindings as auxiliary return values is described in
 ;; O'Reilly's Clojure Programming book on page 205.
 (def ^:dynamic *cookies*)
-(defn capture-cookies-hook [f response]
+(defn capture-cookies-hook [f response & _]
   (when (thread-bound? #'*cookies*)
     (set! *cookies* (:cookies response)))
   (f response))
