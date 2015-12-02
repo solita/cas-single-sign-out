@@ -1,3 +1,6 @@
+## 0.1.3 (2015-12-02)
+- Fix for Ring 1.4.0
+
 ## 0.1.2 (2014-02-11)
 - Fix wrong version number in `project.clj`
 
